@@ -29,12 +29,12 @@ public class BookfluxApplication implements CommandLineRunner {
 
         bookReactiveRepository.deleteAll()
                 .subscribe(null, null, () -> Stream.of(
-                        new Book(UUID.randomUUID().toString(), "9782343454567", "The moon light", "Jonh Doe", "Art", "Book PUB"),
-                        new Book(UUID.randomUUID().toString(), "9782356554765", "A trip to spring", "Katrin Gail", "Fiction", "ABC Publishing"),
-                        new Book(UUID.randomUUID().toString(), "9768765342456", "The Spring warrior", "Mike Doe", "History", "ABC Publishing"),
-                        new Book(UUID.randomUUID().toString(), "9774567234562", "The best of programming", "Aaron Fisher", "Science", "ABC Publishing"),
-                        new Book(UUID.randomUUID().toString(), "9779876654222", "With pleasure to make thing.", "Nick Mall", "Fiction", "ABC Publishing"),
-                        new Book(UUID.randomUUID().toString(), "9788763458762", "Go to the finish first.", "Brian Doodle", "Fiction", "ABC Publishing")
+                        new Book(/*UUID.randomUUID().toString(),*/ "9782343454567", "The moon light", "Jonh Doe", "Art", "Book PUB"),
+                        new Book(/*UUID.randomUUID().toString(), */"9782356554765", "A trip to spring", "Katrin Gail", "Fiction", "ABC Publishing"),
+                        new Book(/*UUID.randomUUID().toString(),*/ "9768765342456", "The Spring warrior", "Mike Doe", "History", "ABC Publishing"),
+                        new Book(/*UUID.randomUUID().toString(), */"9774567234562", "The best of programming", "Aaron Fisher", "Science", "ABC Publishing"),
+                        new Book(/*UUID.randomUUID().toString(),*/ "9779876654222", "With pleasure to make thing.", "Nick Mall", "Fiction", "ABC Publishing"),
+                        new Book(/*UUID.randomUUID().toString(),*/ "9788763458762", "Go to the finish first.", "Brian Doodle", "Fiction", "ABC Publishing")
                 )
                         .forEach(book -> bookReactiveRepository.save(book).subscribe()
                         ));
