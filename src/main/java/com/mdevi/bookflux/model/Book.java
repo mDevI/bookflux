@@ -18,7 +18,7 @@ public class Book {
     @Size(min = 2, max = 150)
     private String title;
     @NotBlank
-    private String[] authors;
+    private String author;
     @NotBlank
     private String genre;
     private String publisher;
@@ -27,11 +27,19 @@ public class Book {
     public Book() {
     }
 
-    public Book(String id, String isbn, String title, String[] authors, String genre, String publisher) {
+    public Book(String id, String isbn, String title, String author, String genre, String publisher) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
-        this.authors = authors;
+        this.author = author;
+        this.genre = genre;
+        this.publisher = publisher;
+    }
+
+    public Book(@Size(min = 13, max = 13) String isbn, @NotBlank @Size(min = 2, max = 150) String title, @NotBlank String author, @NotBlank String genre, String publisher) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
         this.genre = genre;
         this.publisher = publisher;
     }
@@ -60,12 +68,12 @@ public class Book {
         this.title = title;
     }
 
-    public String[] getAuthors() {
-        return authors;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAuthors(String[] authors) {
-        this.authors = authors;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getGenre() {
