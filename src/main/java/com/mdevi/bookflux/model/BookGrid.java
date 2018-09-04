@@ -1,12 +1,12 @@
 package com.mdevi.bookflux.model;
 
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 public class BookGrid {
     private int totalPages;
     private int currentPage;
     private long totalRecords;
-    private List<Book> booksData;
+    private Flux<Book> booksData;
 
     public BookGrid() {
     }
@@ -35,11 +35,11 @@ public class BookGrid {
         this.totalRecords = totalRecords;
     }
 
-    public List<Book> getBooksData() {
+    public Flux<Book> getBooksData() {
         return booksData;
     }
 
-    public void setBooksData(List<Book> booksData) {
+    public void setBooksData(Flux<Book> booksData) {
         this.booksData = booksData;
     }
 }
