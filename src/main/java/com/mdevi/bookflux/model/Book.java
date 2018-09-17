@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @Document(collection = "books")
 public class Book {
@@ -22,26 +21,31 @@ public class Book {
     @NotBlank
     private String genre;
     private String publisher;
-    private Date published;
+    private Integer publishedYear;
+    private String[] tags;
 
     public Book() {
     }
 
-    public Book(String id, String isbn, String title, String author, String genre, String publisher) {
+    public Book(String id, String isbn, String title, String author, String genre, String publisher, Integer publishedYear) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.publisher = publisher;
+        this.publishedYear = publishedYear;
     }
 
-    public Book(@Size(min = 13, max = 13) String isbn, @NotBlank @Size(min = 2, max = 150) String title, @NotBlank String author, @NotBlank String genre, String publisher) {
+    public Book(@Size(min = 13, max = 13) String isbn, @NotBlank @Size(min = 2, max = 150) String title,
+                @NotBlank String author, @NotBlank String genre, String publisher, Integer publishedYear, String[] tags) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.publisher = publisher;
+        this.publishedYear = publishedYear;
+        this.tags = tags;
     }
 
     public String getId() {
@@ -92,11 +96,19 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Date getPublished() {
-        return published;
+    public Integer getPublishedYear() {
+        return publishedYear;
     }
 
-    public void setPublished(Date published) {
-        this.published = published;
+    public void setPublishedYear(Integer publishedYear) {
+        this.publishedYear = publishedYear;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
     }
 }

@@ -23,34 +23,6 @@ public class BookRestController {
     }
 
 
-
-/*    @GetMapping(value = "/page", produces = "application/json")
-    public Mono<BookGrid> getAllBooksByPage(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                            @RequestParam(value = "rows", required = false, defaultValue = "10") Integer rows,
-                                            @RequestParam(value = "sidx", required = false) String sortBy,
-                                            @RequestParam(value = "sord", required = false) String order) {
-
-        LOG.info("GET. Page {} fetched with {} rows, sorted by {} in order by {}.", page, rows, sortBy, order);
-
-        Flux<Book> bookPage = bookRepository
-                .findAll()
-                .skip(page * rows)
-                .take(rows);
-
-        Long countAllRecords = bookRepository.findAll().toStream().count();
-
-        Long totalPages = countAllRecords % rows == 0 ? countAllRecords / rows : countAllRecords / rows + 1;
-
-        // Construct the grid data that will return as JSON data
-        BookGrid bookGrid = new BookGrid();
-        bookGrid.setBooksData(bookPage);
-        bookGrid.setCurrentPage(page);
-        bookGrid.setTotalPages(totalPages.intValue());
-        bookGrid.setTotalRecords(countAllRecords);
-        Mono<BookGrid> bookGridMono = Mono.just(bookGrid);
-        return  bookGridMono;
-    }*/
-
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public Flux<Book> getAllBooks() {
@@ -81,6 +53,7 @@ public class BookRestController {
                     bookExist.setIsbn(book.getIsbn());
                     bookExist.setTitle(book.getTitle());
                     bookExist.setPublisher(book.getPublisher());
+                    bookExist.setPublishedYear(book.getPublishedYear());
                     return bookRepository.save(bookExist);
                 })
                 .map(updatedBook -> new ResponseEntity<>(updatedBook, HttpStatus.OK))
