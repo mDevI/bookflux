@@ -2,8 +2,6 @@ package com.mdevi.bookflux.controller;
 
 import com.mdevi.bookflux.model.Book;
 import com.mdevi.bookflux.repository.BookReactiveRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +14,9 @@ public class BookRestController {
 
     private final BookReactiveRepository bookRepository;
 
-    private static final Logger LOG = LoggerFactory.getLogger(BookReactiveRepository.class);
-
     public BookRestController(BookReactiveRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
-
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
@@ -68,5 +63,17 @@ public class BookRestController {
                 .flatMap(bookToDelete -> bookRepository.delete(bookToDelete).then(Mono.just(new ResponseEntity<Void>(HttpStatus.OK)))
                 )
                 .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/byTitle/{title}")
+    public Flux<Book> getBookByTitle(@PathVariable(value = "title") String title) {
+        return bookRepository
+                .findAllByTitleContainsOrderByTitle(title);
+    }
+
+    @GetMapping("/byAuthor/{author}")
+    public Flux<Book> getBookByAuthor(@PathVariable(value = "author") String author) {
+        return bookRepository
+                .findAllByAuthorContainsOrderByTitle(author);
     }
 }
